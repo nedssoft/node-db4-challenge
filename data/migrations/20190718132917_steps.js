@@ -1,7 +1,7 @@
 
 exports.up = function(knex) {
   return knex.schema.createTable('steps', table => {
-  table.increments()
+    table.increments()
     table.integer('recipe_id').unsigned().notNullable()
     table.integer('step_number').unsigned().notNullable()
     table.text('instruction').notNullable()

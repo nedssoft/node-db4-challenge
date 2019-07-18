@@ -1,6 +1,6 @@
 const express = require('express');
 const { handleError } = require('./helpers')
-
+const router = require('./routes')
 
 const server = express();
 
@@ -9,7 +9,7 @@ server.get('/', (req, res, next) => {
 })
 
 server.use(express.json());
-
+server.use('/api', router)
 server.use((err, req, res, next) => {
   handleError(err, res);
 });

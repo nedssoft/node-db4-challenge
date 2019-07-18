@@ -1,10 +1,12 @@
 const db = require("../dbConfig");
+const { ErrorHandler } = require("../../helpers");
 
 const getRecipes = () => {
   try {
     const recipes = db("recipes");
+    return recipes
   } catch (error) {
-    throw new Error(error.message);
+    throw new ErrorHandler(500, error.message);
   }
 };
 
@@ -21,7 +23,7 @@ const getShoppingList = recipe_id => {
     }
     return null;
   } catch (error) {
-    throw new Error(error.message);
+    throw new ErrorHandler(500, error.message);
   }
 };
 
@@ -35,7 +37,7 @@ const getInstructions = recipe_id => {
     }
     return null;
   } catch (error) {
-    throw new Error(error.message);
+    throw new ErrorHandler(500, error.message);
   }
 };
 
