@@ -13,11 +13,13 @@ const getRecipes = () => {
 const getShoppingList = recipe_id => {
   try {
     const recipe = db("recipes")
-      .where({ id: recipe_id })
-      .first()
+      .select('recipes.id as recipeId', 'recipes.name as recipeName', 'steps.step_number', 'steps.instruction', 'ingredients.name as ingredientName', 'recipe_ingredients.quantity as ingredientQuantity', 'recipe_ingredients.unit as quantityUnit')
+      .where('recipes.id', recipe_id)
       .join("recipe_ingredients", "recipes.id", "recipe_ingredients.recipe_id")
       .join("ingredients", "recipes.id", "recipe_ingredients.ingredient_id")
-      .join("steps", "recipes.id", "steps.recipe_id");
+      .join("steps", "recipes.id", "steps.recipe_id")
+      .orderBy('steps.step_number')
+      
     if (recipe) {
       return recipe;
     }

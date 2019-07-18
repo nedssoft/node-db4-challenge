@@ -9,7 +9,7 @@ server.get('/', (req, res, next) => {
 })
 
 server.use(express.json());
-server.use('/api', router)
+server.use('/api/recipes', router)
 server.use((err, req, res, next) => {
   handleError(err, res);
 });
